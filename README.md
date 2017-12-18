@@ -49,3 +49,38 @@ Host internalhost
   ProxyCommand ssh -i ~/.ssh/appuser bastion -W %h:%p
   User appuser
 ```
+## Homework 06
+
+Добавлены скрипты для установки ruby и mongodb
+
+Добавлен скрипт для развертывания приложения вручную, а так же скрипт для автоматической установки приложения во время создания виртуальной машины.
+
+Для того чтобы при запуске виртульной машины выполнить свой скрипт необходимо добавить опцию ```--metadata-from-file startup-script=startup_script.sh```
+
+Целиком команда будет выглядеть так:
+
+```bash
+gcloud compute instances create reddit-app\
+  --boot-disk-size=10GB \
+  --image-family ubuntu-1604-lts \
+  --image-project=ubuntu-os-cloud \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --zone=europe-west1-c \
+  --metadata-from-file startup-script=startup_script.sh
+```
+
+Для создания правила файрвола можно воспользоваться командой:
+
+```bash
+gcloud compute --project=infra-188914 firewall-rules\
+  create default-puma-server\
+  --direction=INGRESS\
+  --priority=1000\
+  --network=default\
+  --action=ALLOW\
+  --rules=tcp:9292\
+  --source-ranges=0.0.0.0/0\
+  --target-tags=puma-server
+```
