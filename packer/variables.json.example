@@ -1,0 +1,5 @@
+{
+  "project_id": "project-1234",
+  "source_image_family": "ubuntu",
+  "machine_type": "f1-micro"
+}
