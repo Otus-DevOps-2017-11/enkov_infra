@@ -84,3 +84,31 @@ gcloud compute --project=infra-188914 firewall-rules\
   --source-ranges=0.0.0.0/0\
   --target-tags=puma-server
 ```
+
+## Homework 08
+
+Задание со звездочкой 1
+Для добавления ssh ключей в проект нужно воспользоваться ресурсом ```google_compute_project_metadata```
+
+В нем нужно указать
+
+```bash
+metadata {
+  ssh-keys = "appuser1:${file("${var.public_key_path}")}appuser2:${file("${var.public_key_path}")}"
+  }
+```
+
+После добавления ключа appuser_web через веб интерфейсе и применения команды terraform apply ключ appuser_web удаляется, т.к. он не был описан в terraform.
+
+Так же удаляются ранее добавленные ключи.
+
+Задание со звездочкой 2
+
+Для создания балансировщика в GCP нужно создать следующие ресурсы:
+
+- google_compute_instance_group - группа инстансов, на которые нужно балансировать
+- google_compute_http_health_check - проверка работоспосибности инстансов
+- google_compute_backend_service - группа ВМ, которые будут обслужить трафик для балансировщика
+- google_compute_url_map - определяет на какой истанс отправить запрос в зависимости от url
+- google_compute_target_http_proxy
+- google_compute_global_forwarding_rule
