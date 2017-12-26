@@ -84,3 +84,29 @@ gcloud compute --project=infra-188914 firewall-rules\
   --source-ranges=0.0.0.0/0\
   --target-tags=puma-server
 ```
+
+### HOMEWORK 07
+
+Создан конфиг для packer для создания образа в GCP.
+Так же выполнены дополнительные задания
+
+Все переменные вынесены в variables.json файл
+
+```bash
+{
+  "project_id": "project-1234",
+  "source_image_family": "ubuntu",
+  "machine_type": "f1-micro"
+}
+```
+Для запуска ВМ в GCP использовалась следующая команда:
+```bash
+gcloud compute instances create reddit-app\
+  --boot-disk-size=10GB \
+  --image-family reddit-full \
+  --image-project=infra-188914 \
+  --machine-type=g1-small \
+  --tags puma-server \
+  --restart-on-failure \
+  --zone=europe-west1-c
+```
