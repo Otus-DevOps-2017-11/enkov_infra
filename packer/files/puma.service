@@ -1,0 +1,24 @@
+[Unit]
+Description=Puma HTTP Server
+After=network.target
+
+[Service]
+# Foreground process (do not use --daemon in ExecStart or config.rb)
+Type=simple
+
+
+User=appuser
+
+# The path to the puma application root
+# Also replace the "<WD>" place holders below with this path.
+WorkingDirectory=/home/appuser/reddit
+ExecStart=/usr/local/bin/puma
+
+# Variant: Use config file with `bind` directives instead:
+# ExecStart=<WD>/sbin/puma -C config.rb
+# Variant: Use `bundle exec --keep-file-descriptors puma` instead of binstub
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
