@@ -138,3 +138,53 @@ metadata {
 - google_compute_url_map - определяет на какой истанс отправить запрос в зависимости от url
 - google_compute_target_http_proxy
 - google_compute_global_forwarding_rule
+
+
+## Homework 09
+
+Задание со звездочкой 1
+
+Для того чтобы использовать remote state в gcp нужно сначала создать бакет с помощью команды
+
+```bash
+gsutil mb gs://enkov-terraform-state
+```
+
+И прописать настройки в terraform
+
+```bash
+terraform {
+  backend "gcs" {
+    bucket = "example"
+    prefix   = "example/terraform.tfstate"
+  }
+}
+```
+
+Задание со звездочкой 2
+
+Для того чтобы при деплое сразу развертывалось и приложение было сделано следующее:
+
+Добавлен шаблон для запуска приложения, в который подставляется переменная окружения с адресом базы данных
+
+```bash
+data "template_file" "puma_service" {
+  template = "${file("../modules/app/templates/puma.service.tpl")}"
+
+  vars {
+    db_address = "${module.db.internal_ip}"
+  }
+}
+
+```
+
+В провиженинге базы меняется файл настроек для того чтобы mongo слушала на всех адресах, а не только на 127.0.0.1, т.к. база данных теперь в отдельной ВМ.
+
+```bash
+provisioner "remote-exec" {
+  inline = [
+    "sudo sed -i 's/bindIp: .*/bindIp: 0.0.0.0/' /etc/mongod.conf",
+    "sudo systemctl restart mongod",
+  ]
+}
+```
