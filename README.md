@@ -230,6 +230,7 @@ ansible-playbook --inventory-file=/path/to/terraform-inventory site.yml
 Разбиение ansible на роли и окружения
 
 Были созданы роли для app, db.
+
 Так же в этом задании используется роль из ansible-galaxy jdauphant.nginx
 
 Добавлены два окружения prod и stage. В каждом из окружжений объявленны свои переменные.
