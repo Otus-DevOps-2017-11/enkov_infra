@@ -249,4 +249,6 @@ TF_STATE=../terraform/stage ansible-playbook --inventory-file=./environments/sta
 Задание с двумя звездочками
 
 Нужно написать .travis.yml файл, в котором установятся все необходимые пакеты и запустить линтеры.
-Единственная проблема в том что не все файлы нужны для проверки terraform есть в репозитории и из-за этого проверка не проходит
+Для того чтобы проверка terraform работала было сделано следующее
+Добавлен terraform.tfvars.example, который перед проверкой копируется в terraform.tfvars
+Так же создаются пустые файлы appuser.pub и appuser и удаляется remote_backend.tf.
