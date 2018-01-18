@@ -1,0 +1,5 @@
+project = "infra-12345"
+public_key_path = "./appuser.pub"
+private_key_path = "./appuser"
+disk_image = "reddit-base"
+gcp_provider_version = "1.4.0"

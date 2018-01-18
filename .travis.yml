@@ -22,6 +22,11 @@ install:
   - sudo unzip -o terraform.zip -d /usr/local/bin/
   - wget -O tflint.zip https://github.com/wata727/tflint/releases/download/v0.5.4/tflint_linux_amd64.zip
   - sudo unzip -o tflint.zip -d /usr/local/bin/
+  - cd terraform/stage
+  - cp terraform.tfvars.example terraform.tfvars
+  - touch appuser.pub appuser
+  - rm -f remote_backend.tf
+  - cd ../../
 
 script:
   - cd packer
