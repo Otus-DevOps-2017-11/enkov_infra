@@ -224,3 +224,28 @@ http://docs.ansible.com/ansible/latest/dev_guide/developing_inventory.html
 ```bash
 ansible-playbook --inventory-file=/path/to/terraform-inventory site.yml
 ```
+
+## Homework 12
+
+Разбиение ansible на роли и окружения
+
+Были созданы роли для app, db.
+Так же в этом задании используется роль из ansible-galaxy jdauphant.nginx
+
+Добавлены два окружения prod и stage. В каждом из окружжений объявленны свои переменные.
+
+Задание со звездочкой
+
+Для того чтобы использовать динамической инвентори для окружений stage и prod используя terraform-inventory
+нужно либо положить исполняемый файл в каждое окружение либо сделать симлинк, т.к. путь поиска групповых переменных осуществляется там же где и лежит инвентори.
+
+Если все настроено правильно то динамический инвентори можно использовать следующим образом
+
+```bash
+TF_STATE=../terraform/stage ansible-playbook --inventory-file=./environments/stage/terraform-inventory playbooks/site.yml
+```
+
+Задание с двумя звездочками
+
+Нужно написать .travis.yml файл, в котором установятся все необходимые пакеты и запустить линтеры.
+Единственная проблема в том что не все файлы нужны для проверки terraform есть в репозитории и из-за этого проверка не проходит
