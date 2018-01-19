@@ -188,3 +188,12 @@ provisioner "remote-exec" {
   ]
 }
 ```
+## Homework 10
+
+Изучение основ ansible
+
+Задание со звездочкой
+
+Для написания инвентарного файла нужно воспользоваться докементацией по ссылке
+
+http://docs.ansible.com/ansible/latest/dev_guide/developing_inventory.html
