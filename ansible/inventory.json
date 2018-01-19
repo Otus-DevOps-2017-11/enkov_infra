@@ -1,8 +1,18 @@
 {
-    "dbserver": {
-        "hosts": ["35.189.193.207"]
-    },
-    "appserver": {
-        "hosts": ["35.195.118.222"]
+  "dbservers": {
+    "hosts": ["dbserver"]
+  },
+  "appservers": {
+    "hosts": ["appserver"]
+  },
+  "_meta": {
+    "hostvars": {
+      "appserver": {
+        "ansible_host": "35.195.118.222"
+      },
+      "dbserver": {
+        "ansible_host": "35.189.193.207"
+      }
     }
+  }
 }
