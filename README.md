@@ -197,3 +197,30 @@ provisioner "remote-exec" {
 Для написания инвентарного файла нужно воспользоваться докементацией по ссылке
 
 http://docs.ansible.com/ansible/latest/dev_guide/developing_inventory.html
+
+## Homework 11
+
+Создание ansible playbooks
+
+Были созданы ansible playbooks для развертывания приложения и настройки базы данных
+
+Так же был переделан провижининг в packer со скриптов на ansible
+
+Задание со звездочкой
+
+Было рассмотренно два варианта dynamic inventory для GCP
+
+1. gce.py(описан в документации ansible http://docs.ansible.com/ansible/latest/guide_gce.html)
+2. terraform-inventory (https://github.com/adammck/terraform-inventory)
+
+Второй вариант показался более удобным, т.к. для него не нужно делать никаких дополнительных настроек и он умеет работать не только с GCP
+
+Для установки можно воспользоваться уже скомпилированными файлами или скомпилировать самим.
+
+Для использования terraform-inventory нужно указать переменную окружения TF_STATE, в которой нужно прописать путь до папки с terraform или путь до tfstate файла. terraform-inventory умеет работать с remote state.
+
+После указания переменной окружения запуск ansible выглядит вот так:
+
+```bash
+ansible-playbook --inventory-file=/path/to/terraform-inventory site.yml
+```
