@@ -252,3 +252,41 @@ TF_STATE=../terraform/stage ansible-playbook --inventory-file=./environments/sta
 Для того чтобы проверка terraform работала было сделано следующее
 Добавлен terraform.tfvars.example, который перед проверкой копируется в terraform.tfvars
 Так же создаются пустые файлы appuser.pub и appuser и удаляется remote_backend.tf.
+
+
+## Homework 13
+
+Изучение тестирования ansible ролей с помощь vagrant, molecula, testinfra
+
+Был написан Vagrantfile для развертывания 2 виртуальных машин(appserver, dbserver) и провиженинга ролями app и db.
+
+Дописан тест для проверки слушает ли заданные порт mongodb.
+
+Задание со звездочкой 1
+
+Для того чтобы у nginx была правильная конфигурация нужно добавить еще одну переменную в Vagrantfile
+
+```bash
+ansible.extra_vars = {
+  "nginx_sites" => '{"default": ["listen 80", "server_name \"reddit\"", "location / { proxy_pass http://127.0.0.1:9292; }"]}'
+}
+```
+
+Задание со звездочкой 2
+
+Роль db была вынесена в отдельный репозиторий ```https://github.com/Otus-DevOps-2017-11/enkov_infra_db.git```
+
+Был написан конфиг для travis по предоставленным примерам
+
+Роль добавлена в зависимости в файлы:
+
+- environments/prod/requirements.yml
+- environments/stage/requirements.yml
+
+Задание со звездочкой 3
+
+Для настройки оповещений в slack нужно выполнить команду
+
+```bash
+travis encrypt "devops-team-otus:SLACK_TOKEN" --add notifications.slack -r GITHUB_ORG/GITHUB_REPO
+```
